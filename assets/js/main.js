@@ -240,4 +240,26 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  function protect_email(element) {
+    const email = element.getAttribute('data-e');
+    const domain = element.getAttribute('data-d');
+
+    const elType = element.tagName.toLowerCase();
+
+    switch (elType) {
+      case 'a':
+        element.setAttribute('href', 'mailto:' + email + '@' + domain);
+        break;
+      case 'span':
+        element.innerHTML = email + '@' + domain;
+        break;
+      default:
+        break;
+    }
+  }
+
+  const emailElements = document.querySelectorAll('.protect-email');
+  emailElements.forEach(emailElement => {
+    protect_email(emailElement);
+  });
 })();
